@@ -9,10 +9,10 @@ function App() {
       try {
         const res = await fetch(BASE_URL);
         const data = await res.json();
-        const dataReq = data.results;
+        const users = data.results;
 
         // console.log(dataReq);
-        setUsers(dataReq);
+        setUsers(users);
         // console.log(users);
       } catch (error) {
         console.log("error");
@@ -25,14 +25,16 @@ function App() {
   if (!users) return <div>Loading...</div>;
 
   return (
-    <ul className="app">
-      {users.map((user) => (
-        <li key={user.id}>
-          {user.name.title} {user.name.first} {user.name.last}
-          {/* {user.picture.large} */}
-        </li>
-      ))}
-    </ul>
+    <div className="container">
+      <ul className="col-2 user">
+        {users.map((user) => (
+          <li key={user.id}>
+            {user.name.title} {user.name.first} {user.name.last}
+            <img src={user.picture.large} alt={user.picture.large} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
